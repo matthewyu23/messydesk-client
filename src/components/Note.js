@@ -1,20 +1,20 @@
-import { useState } from 'react';
 
-const Note = () => {
-    const [noteContent, setNote] = useState('');
 
+const Note = (props) => {
 
     const saveToState = (event) => {
-        console.log(event.target.value);
-        setNote(event.target.value);
+        const data = [props.noteId, event.target.value];
+        props.saveToApp(data);
     }
+
     return (
         <div className="note">
             <div className="card mt-4 shadow-sm">
                 <div className="card-body">
                     <div className="form-group">
-                        <textarea className="form-control rounded-0 border-0 " id="exampleFormControlTextarea1" rows="15" placeholder="✏️  Write something..." onChange={saveToState} value={noteContent}></textarea>
+                        <textarea className="form-control rounded-0 border-0 " id="exampleFormControlTextarea1" rows="15" placeholder="✏️  Write something..." onChange={saveToState} value={props.notes[props.noteId]}></textarea>
                     </div>
+
                 </div>
             </div>
         </div>

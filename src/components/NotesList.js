@@ -1,31 +1,31 @@
 import Note from './Note';
 
-const NotesList = () => {
+const NotesList = (props) => {
 
     return (
 
         <div className="notes-list">
             <div className='row'>
                 <div className='col-lg-4'>
-                    <Note /> 
+                    <Note noteId='0' saveToApp={props.saveToApp} notes={props.notes}/> 
                 </div>   
                 <div className='col-lg-4'>
-                    <Note /> 
+                    <Note noteId='1' saveToApp={props.saveToApp} notes={props.notes}/> 
                 </div>   
                 <div className='col-lg-4'>
-                    <Note /> 
+                    <Note noteId='2' saveToApp={props.saveToApp} notes={props.notes}/> 
                 </div>     
             </div>
 
             <div className='row'>
                 <div className='col-lg-4'>
-                    <Note /> 
+                    <Note noteId='3' saveToApp={props.saveToApp} notes={props.notes}/> 
                 </div>   
                 <div className='col-lg-4'>
-                    <Note /> 
+                    <Note noteId='4' saveToApp={props.saveToApp} notes={props.notes}/> 
                 </div>   
                 <div className='col-lg-4'>
-                    <Note /> 
+                    <Note noteId='5' saveToApp={props.saveToApp} notes={props.notes}/> 
                 </div>     
             </div>
         </div>
