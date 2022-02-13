@@ -6,13 +6,14 @@ const Note = (props) => {
         const data = [props.noteId, event.target.value];
         props.saveToApp(data);
     }
+    console.log(props.notes)
 
     return (
         <div className="note">
             <div className="card mt-4 shadow-sm">
                 <div className="card-body">
                     <div className="form-group">
-                        <textarea className="form-control rounded-0 border-0 " id="exampleFormControlTextarea1" rows="15" placeholder="✏️  Write something..." onChange={saveToState} value={props.notes[props.noteId]}></textarea>
+                        <textarea className="form-control rounded-0 border-0 " id="exampleFormControlTextarea1" rows="15" placeholder="✏️  Write something..." onChange={saveToState} defaultValue={props.notes[props.noteId]}></textarea>
                     </div>
 
                 </div>
