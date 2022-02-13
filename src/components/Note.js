@@ -2,10 +2,11 @@ const Note = () => {
 
     return (
         <div className="note">
-            <div className="card">
+            <div className="card mt-4">
                 <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <div class="form-group">
+                        <textarea class="form-control rounded-0 border-0 " id="exampleFormControlTextarea1" rows="10" placeholder="✏️  Write something..."></textarea>
+                    </div>
                 </div>
             </div>
         </div>

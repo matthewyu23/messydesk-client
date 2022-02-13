@@ -27,7 +27,7 @@ const NotesList = () => {
                 <div className='col'>
                     <Note /> 
                 </div>     
-            </div> 
+            </div>
         </div>
     )
 }
