@@ -1,8 +1,8 @@
 import NotesList from './components/NotesList';
-
+import messydesk from './messydesk.png';
 const App = () => {
-  return <div className='container-fluid'>'
-    <p className='text-center font-italic'>Notes App</p>
+  return <div className='container-fluid'>
+    <img src={messydesk} className='.img-thumbnail'/>
     <NotesList />
   </div>;
 }
