@@ -22,3 +22,7 @@ img {
       max-width: 5%;
   }
 }
+
+.padded-right {
+  padding-right: 10px;
+}
