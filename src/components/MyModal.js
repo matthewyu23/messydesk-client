@@ -22,7 +22,6 @@ const MyModal = (props) => {
 
             <Button  className="padded" onClick={props.joinTable}>Join a Table</Button>
                
-            {/* <Button onClick={props.onHide}>Close</Button> */}
           </Modal.Footer>
         </Modal>
       );
