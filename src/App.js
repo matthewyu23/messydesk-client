@@ -10,6 +10,7 @@ const App = () => {
 
   var notes = (localStorage.getItem("notes")) ? JSON.parse(localStorage.getItem("notes")) : ["", "", "", "", "", ""];
   const [modalShow, setModalShow] = useState(true);
+  const [tableCode, setTableCode] = useState("000000");
 
   const saveToApp = (data) => {
       notes[data[0]] = data[1]
@@ -19,6 +20,14 @@ const App = () => {
 
   const createTable = () => {
     setModalShow(false)
+
+    var tableCode = ""
+    for (var i = 0; i < 6; i++) {
+      tableCode += Math.floor(Math.random() * 10)
+    }
+    console.log(tableCode);
+    setTableCode(tableCode)
+
   }
 
   const joinTable = () => {
@@ -34,7 +43,7 @@ const App = () => {
       <Container fluid>
       {/* <img src={messydesk} className='.img-thumbnail'/> */}
       <h1 className='messydesk'><span className='reddd'>Messy</span> <br></br>Desk</h1>
-        <h1 className='code'><span className='reddd'>Table code</span> <br></br>123-456</h1>
+        <h1 className='code'><span className='reddd'>Table code</span> <br></br>{tableCode.substring(0, 3) + "-" + tableCode.substring(3)}</h1>
       </Container>
     </Navbar>
 
