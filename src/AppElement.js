@@ -9,12 +9,14 @@ import Quill from 'quill';
 import { Fragment } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+
+import {useNavigate} from 'react-router-dom';
 export default function AppElement() {
 
     var notes = (localStorage.getItem("notes")) ? JSON.parse(localStorage.getItem("notes")) : ["", "", "", "", "", ""];
     const [modalShow, setModalShow] = useState(true);
     const [tableCode, setTableCode] = useState("000000");
-    const {tableCode: tableId} = useParams();
+    const {tableCode: tableId, show: showFromParam} = useParams();
     const [socket, setSocket] = useState();
     const [quill0, setQuill0] = useState();
     const [quill1, setQuill1] = useState();
@@ -22,7 +24,12 @@ export default function AppElement() {
     const [quill3, setQuill3] = useState();
     const [quill4, setQuill4] = useState();
     const [quill5, setQuill5] = useState();
-    console.log(tableId)
+    console.log("haha" + tableId)
+    console.log("haha" + showFromParam)
+
+
+
+
 
 
     const saveToApp = (data) => {
@@ -62,17 +69,27 @@ export default function AppElement() {
     }, [socket, tableId, quill0, quill1, quill2, quill3, quill4, quill5]);
 
     
-  
-    const joinTable = (c) => {
-        return <Navigate to={"/table/" + c} />
+    const navigate = useNavigate()
+    const joinTable = () => {
+        setModalShow(false);
+        console.log("new table code: " + tableCode)
+        navigate(`/table/${tableCode}/false`)
+        
     }
+
+    const createTable = (c) => {
+        setModalShow(false);
+    }
+    
   
   
     
   
     useEffect(() => {
       
+      // const s = io('http://localhost:3001')
       const s = io('https://messydesk.herokuapp.com/')
+
       setSocket(s);
       return () => {
         s.disconnect();
@@ -83,7 +100,7 @@ export default function AppElement() {
 
         <div className='container-fluid'>
     
-        {/* <MyModal show={modalShow} createTable={createTable} joinTable={joinTable}/> */}
+        <MyModal show={modalShow && !(showFromParam === 'false')} createTable={createTable} joinTable={joinTable} setTableCode={setTableCode}/>
           <Navbar bg="none" expand={false}>
             <Container fluid>
               {/* <img src={messydesk} className='.img-thumbnail'/> */}
