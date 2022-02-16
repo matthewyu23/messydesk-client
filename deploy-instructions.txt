@@ -1,0 +1,9 @@
+Client - AppElement.js: 
+change localhost to heroku
+commit and push to heroku
+
+Server - server.js
+change port to heroku's port
+run npm build
+Add _redirects file to build folder
+drag to netlify
