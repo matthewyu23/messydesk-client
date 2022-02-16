@@ -21,14 +21,31 @@ const Note = (props) => {
         }
     }, []);
     
+    useEffect(() => {
+        // recieving changes
+        if (quill == null || props.socket == null) return;
+        const handler = (delta) => {
+            if (delta[0] == props.noteId) {
+                quill.updateContents(delta[1]);
+            }
+           
+
+            
+        }
+        props.socket.on('recieve-changes', handler);
+        return () => {
+            props.socket.off('recieve-changes', handler);
+        }
+    }, [quill, props.socket]);
+
 
     useEffect(() => {
-        console.log('ran')
+        // sending changes
         if (quill == null || props.socket == null) return;
         const handler = (delta, oldDelta, source) => {
             if (source !== 'user') return
             props.socket.emit('send-changes', [props.noteId, delta]);
-            console.log("heheh")
+
             
         }
         quill.on('text-change', handler);
@@ -37,6 +54,7 @@ const Note = (props) => {
         }
     }, [quill, props.socket]);
 
+    
     
     return (
         <div className="note">
