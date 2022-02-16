@@ -5,6 +5,7 @@ import { useState, useEffect} from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import {io} from 'socket.io-client';
+import Quill from 'quill';
 
 
 
@@ -36,14 +37,20 @@ const App = () => {
   }
 
 
+  const [socket, setSocket] = useState();
+
   useEffect(() => {
-    const socket = io('http://localhost:3001');
-
+    
+    const s = io('http://localhost:3001')
+    setSocket(s);
     return () => {
-      socket.disconnect();
+      s.disconnect();
     }
-  });
+  }, []);
 
+
+
+  
 
 
 
@@ -66,7 +73,7 @@ const App = () => {
 
 
 
-    <NotesList saveToApp={saveToApp} notes={notes}/>
+    <NotesList saveToApp={saveToApp} notes={notes} socket={socket}/>
     
   </div>;
 }
