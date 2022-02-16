@@ -9,7 +9,7 @@ const Note = (props) => {
         props.saveToApp(data);
     }
 
-    const [quill, setQuill] = useState();
+
     const wrapperRef = useCallback(wrapper => {
         console.log('ran')
         if (wrapper !== null) {
@@ -17,16 +17,19 @@ const Note = (props) => {
             const editor = document.createElement('div');
             wrapper.append(editor);
             const q = new Quill('#editor' + props.noteId, { theme: 'snow' });
-            setQuill(q);
+            
+            q.disable()
+            q.setText("Loading")
+            props.setQuill(q);
         }
     }, []);
     
     useEffect(() => {
         // recieving changes
-        if (quill == null || props.socket == null) return;
+        if (props.quill == null || props.socket == null) return;
         const handler = (delta) => {
             if (delta[0] == props.noteId) {
-                quill.updateContents(delta[1]);
+                props.quill.updateContents(delta[1]);
             }
            
 
@@ -36,23 +39,23 @@ const Note = (props) => {
         return () => {
             props.socket.off('recieve-changes', handler);
         }
-    }, [quill, props.socket]);
+    }, [props.quill, props.socket]);
 
 
     useEffect(() => {
         // sending changes
-        if (quill == null || props.socket == null) return;
+        if (props.quill == null || props.socket == null) return;
         const handler = (delta, oldDelta, source) => {
             if (source !== 'user') return
             props.socket.emit('send-changes', [props.noteId, delta]);
 
             
         }
-        quill.on('text-change', handler);
+        props.quill.on('text-change', handler);
         return () => {
-            quill.off('text-change', handler);
+            props.quill.off('text-change', handler);
         }
-    }, [quill, props.socket]);
+    }, [props.quill, props.socket]);
 
     
     
