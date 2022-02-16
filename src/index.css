@@ -29,11 +29,14 @@ img {
 
 .messydesk {
   font-family: 'Roboto', sans-serif;
-
+  font-weight: 700;
+  font-style: normal;
 }
 
 .code {
   font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-style: normal;
   text-align: right;
 }
 
