@@ -18,19 +18,17 @@ const MyModal = (props) => {
              
           </Modal.Body>
           <Modal.Footer> 
-            <div className="row">
+
 
             
-            <Button  className="padded" onClick={props.createTable}>Create a Table</Button>
-            <Form>
-
+            
+            <Form className='d-flex'>
+            <Button onClick={props.createTable}>Create a Table</Button>
             <Form.Control type="number" placeholder="Table Code" onChange={e => {props.setTableCode(e.target.value)}}/>
-            <Button variant="primary" type="submit" onClick={props.joinTable}>
-              Join table
-            </Button>
+            <Button onClick={props.joinTable}>Join table</Button>
             </Form>
-            {/* <Button  className="padded" onClick={props.joinTable}>Join a Table</Button> */}
-            </div>
+
+
             
           </Modal.Footer>
         </Modal>

@@ -44,3 +44,9 @@ img {
 .editor .ql-editor{
   height: 4in;
 }
+
+.form-control {
+  width: 30% !important;
+  margin-left: 5rem;
+  margin-right: 1rem;
+}
