@@ -33,6 +33,15 @@ export default function AppElement() {
   
     useEffect(() => {
         if (socket == null || quill0 == null || quill1 == null || quill2 == null || quill3 == null || quill4 == null || quill5 == null) return
+        const interval = setInterval(() => {
+            socket.emit('save-table', [quill0.getContents(), quill1.getContents(), quill2.getContents(), quill3.getContents(), quill4.getContents(), quill5.getContents()]);
+        }, 2000);
+        return () => clearInterval(interval);
+    }, [socket, quill0, quill1, quill2, quill3, quill4, quill5]);
+
+
+    useEffect(() => {
+        if (socket == null || quill0 == null || quill1 == null || quill2 == null || quill3 == null || quill4 == null || quill5 == null) return
         socket.once("load-table", (table) => {
             console.log(table)
             quill0.setContents(table[0]);
