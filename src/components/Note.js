@@ -1,4 +1,6 @@
-
+import "quill/dist/quill.snow.css";
+import Quill from 'quill';
+import {useEffect, useCallback} from 'react';
 
 const Note = (props) => {
 
@@ -6,14 +8,25 @@ const Note = (props) => {
         const data = [props.noteId, event.target.value];
         props.saveToApp(data);
     }
-    console.log(props.notes)
 
+    const wrapperRef = useCallback(wrapper => {
+        if (wrapper !== null) {
+            wrapper.innerHTML = ""
+            const editor = document.createElement('div');
+            wrapper.append(editor);
+            new Quill('#editor' + props.noteId, { theme: 'snow' });
+        }
+    }, []);
+    
+   
+    
     return (
         <div className="note">
             <div className="card mt-4 shadow-sm">
                 <div className="card-body">
                     <div className="form-group">
-                        <textarea className="form-control rounded-0 border-0 " id="exampleFormControlTextarea1" rows="15" placeholder="✏️  Write something..." onChange={saveToState} defaultValue={props.notes[props.noteId]}></textarea>
+                        <div id={'editor' + props.noteId} className='editor' ref={wrapperRef}></div>
+                        {/* <textarea className="form-control rounded-0 border-0 " id="exampleFormControlTextarea1" rows="15" placeholder="✏️  Write something..." onChange={saveToState} defaultValue={props.notes[props.noteId]}></textarea> */}
                     </div>
 
                 </div>
