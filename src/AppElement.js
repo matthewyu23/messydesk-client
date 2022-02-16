@@ -102,7 +102,12 @@ export default function AppElement() {
     
         <MyModal show={modalShow && !(showFromParam === 'false')} createTable={createTable} joinTable={joinTable} setTableCode={setTableCode}/>
           <Navbar bg="none" expand={false}>
+            
             <Container fluid>
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet" />
+
               {/* <img src={messydesk} className='.img-thumbnail'/> */}
               <h1 className='messydesk'><span className='reddd'>Messy</span> <br></br>Desk</h1>
               <h1 className='code'><span className='reddd'>Table code</span> <br></br>{tableId.substring(0, 3) + "-" + tableId.substring(3)}</h1>
