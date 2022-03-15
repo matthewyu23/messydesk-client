@@ -13,7 +13,9 @@ import { useParams } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 export default function AppElement() {
 
-    var notes = (localStorage.getItem("notes")) ? JSON.parse(localStorage.getItem("notes")) : ["", "", "", "", "", ""];
+ 
+
+
 
     const [tableCode, setTableCode] = useState("0");
     const {tableCode: tableId} = useParams();
@@ -26,18 +28,12 @@ export default function AppElement() {
     const [quill5, setQuill5] = useState();
     console.log("haha" + tableId)
 
-    
 
 
 
 
 
 
-    const saveToApp = (data) => {
-        notes[data[0]] = data[1]
-        localStorage.setItem("notes", JSON.stringify(notes)); 
-  
-    }
   
     useEffect(() => {
         if (socket == null || quill0 == null || quill1 == null || quill2 == null || quill3 == null || quill4 == null || quill5 == null) return
@@ -50,6 +46,23 @@ export default function AppElement() {
 
     useEffect(() => {
         if (tableId == undefined || socket == null || quill0 == null || quill1 == null || quill2 == null || quill3 == null || quill4 == null || quill5 == null) return
+        
+        // add current note to local storage
+        var recentTables = (localStorage.getItem("recentTables")) ? JSON.parse(localStorage.getItem("recentTables")) : ["No Recent Tables"];
+        if (recentTables[0] == "No Recent Tables") {
+          localStorage.setItem("recentTables", JSON.stringify([tableId]));
+        } else {
+          var newRecentTables = [tableId]
+          for (var i = 0; i < recentTables.length; i++) {
+            if (recentTables[i] != tableId) {
+              newRecentTables.push(recentTables[i])
+            }
+          }
+
+          localStorage.setItem("recentTables", JSON.stringify(newRecentTables));
+
+        }
+    
         socket.once("load-table", (table) => {
             console.log(table)
             quill0.setContents(table[0]);
@@ -72,15 +85,12 @@ export default function AppElement() {
     
     const navigate = useNavigate()
     const joinTable = () => {
-
-        console.log("new table code: " + tableCode)
         navigate(`/table/${tableCode}`)
-        
     }
 
     const createTable = (c) => {
-
-        navigate("/table/" + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10))
+      var newCode = "" + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10)
+      navigate("/table/" + newCode)
     }
     
   
@@ -121,7 +131,7 @@ export default function AppElement() {
               {/* <h1 className='code'><span className='reddd'>Table code</span> <br></br>{tableId.substring(0, 3) + "-" + tableId.substring(3)}</h1> */}
             </Container>
           </Navbar>
-        <NotesList saveToApp={saveToApp} notes={notes} socket={socket} quill0={quill0} quill1={quill1} quill2={quill2} quill3={quill3} quill4={quill4} quill5={quill5} setQuill0={setQuill0} setQuill1={setQuill1} setQuill2={setQuill2} setQuill3={setQuill3} setQuill4={setQuill4} setQuill5={setQuill5}/>
+        <NotesList socket={socket} quill0={quill0} quill1={quill1} quill2={quill2} quill3={quill3} quill4={quill4} quill5={quill5} setQuill0={setQuill0} setQuill1={setQuill1} setQuill2={setQuill2} setQuill3={setQuill3} setQuill4={setQuill4} setQuill5={setQuill5}/>
         
       </div>
     )
@@ -140,11 +150,11 @@ export default function AppElement() {
 
               {/* <img src={messydesk} className='.img-thumbnail'/> */}
               <h1 className='messydesk'><span className='reddd'>Messy</span> <br></br>Desk</h1>
-              <h1 className='code'><span className='reddd'>Table code</span> <br></br>{tableId.substring(0, 3) + "-" + tableId.substring(3)}</h1>
+              <h1 className='code'><span className='reddd'>Table code</span> <br></br>{tableId.substring(0, 3) + " " + tableId.substring(3)}</h1>
 
             </Container>
           </Navbar>
-        <NotesList saveToApp={saveToApp} notes={notes} socket={socket} quill0={quill0} quill1={quill1} quill2={quill2} quill3={quill3} quill4={quill4} quill5={quill5} setQuill0={setQuill0} setQuill1={setQuill1} setQuill2={setQuill2} setQuill3={setQuill3} setQuill4={setQuill4} setQuill5={setQuill5}/>
+        <NotesList socket={socket} quill0={quill0} quill1={quill1} quill2={quill2} quill3={quill3} quill4={quill4} quill5={quill5} setQuill0={setQuill0} setQuill1={setQuill1} setQuill2={setQuill2} setQuill3={setQuill3} setQuill4={setQuill4} setQuill5={setQuill5}/>
         
       </div>
     )

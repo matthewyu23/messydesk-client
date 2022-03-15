@@ -4,10 +4,6 @@ import {useEffect, useCallback, useState} from 'react';
 
 const Note = (props) => {
 
-    const saveToState = (event) => {
-        const data = [props.noteId, event.target.value];
-        props.saveToApp(data);
-    }
 
 
     const wrapperRef = useCallback(wrapper => {
