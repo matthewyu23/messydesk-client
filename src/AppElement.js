@@ -15,7 +15,7 @@ export default function AppElement() {
 
     var notes = (localStorage.getItem("notes")) ? JSON.parse(localStorage.getItem("notes")) : ["", "", "", "", "", ""];
 
-    const [tableCode, setTableCode] = useState("000000");
+    const [tableCode, setTableCode] = useState("0");
     const {tableCode: tableId} = useParams();
     const [socket, setSocket] = useState();
     const [quill0, setQuill0] = useState();
@@ -141,6 +141,7 @@ export default function AppElement() {
               {/* <img src={messydesk} className='.img-thumbnail'/> */}
               <h1 className='messydesk'><span className='reddd'>Messy</span> <br></br>Desk</h1>
               <h1 className='code'><span className='reddd'>Table code</span> <br></br>{tableId.substring(0, 3) + "-" + tableId.substring(3)}</h1>
+
             </Container>
           </Navbar>
         <NotesList saveToApp={saveToApp} notes={notes} socket={socket} quill0={quill0} quill1={quill1} quill2={quill2} quill3={quill3} quill4={quill4} quill5={quill5} setQuill0={setQuill0} setQuill1={setQuill1} setQuill2={setQuill2} setQuill3={setQuill3} setQuill4={setQuill4} setQuill5={setQuill5}/>
