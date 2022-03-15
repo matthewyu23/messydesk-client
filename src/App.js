@@ -30,8 +30,8 @@ const App = () => {
   return (
   <Router>
     <Routes> 
-      <Route path="/" element={<Navigate to={"/table/" + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + "/true"} />} />
-      <Route path="/table/:tableCode/:show" element={<AppElement/>}>
+      <Route path="/" element={<AppElement/>} />
+      <Route path="/table/:tableCode" element={<AppElement/>}>
 
 
       </Route>

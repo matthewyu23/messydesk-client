@@ -14,9 +14,9 @@ import {useNavigate} from 'react-router-dom';
 export default function AppElement() {
 
     var notes = (localStorage.getItem("notes")) ? JSON.parse(localStorage.getItem("notes")) : ["", "", "", "", "", ""];
-    const [modalShow, setModalShow] = useState(true);
+
     const [tableCode, setTableCode] = useState("000000");
-    const {tableCode: tableId, show: showFromParam} = useParams();
+    const {tableCode: tableId} = useParams();
     const [socket, setSocket] = useState();
     const [quill0, setQuill0] = useState();
     const [quill1, setQuill1] = useState();
@@ -25,7 +25,8 @@ export default function AppElement() {
     const [quill4, setQuill4] = useState();
     const [quill5, setQuill5] = useState();
     console.log("haha" + tableId)
-    console.log("haha" + showFromParam)
+
+    
 
 
 
@@ -48,7 +49,7 @@ export default function AppElement() {
 
 
     useEffect(() => {
-        if (socket == null || quill0 == null || quill1 == null || quill2 == null || quill3 == null || quill4 == null || quill5 == null) return
+        if (tableId == undefined || socket == null || quill0 == null || quill1 == null || quill2 == null || quill3 == null || quill4 == null || quill5 == null) return
         socket.once("load-table", (table) => {
             console.log(table)
             quill0.setContents(table[0]);
@@ -71,14 +72,15 @@ export default function AppElement() {
     
     const navigate = useNavigate()
     const joinTable = () => {
-        setModalShow(false);
+
         console.log("new table code: " + tableCode)
-        navigate(`/table/${tableCode}/false`)
+        navigate(`/table/${tableCode}`)
         
     }
 
     const createTable = (c) => {
-        setModalShow(false);
+
+        navigate("/table/" + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10) + Math.floor(Math.random() * 10))
     }
     
   
@@ -87,8 +89,13 @@ export default function AppElement() {
   
     useEffect(() => {
       
-      // const s = io('http://localhost:3001')
-      const s = io('https://messydesk.herokuapp.com/')
+
+      // use for dev
+      const s = io('http://localhost:3001')
+
+
+      // use for deployment
+      // const s = io('https://messydesk.herokuapp.com/')
 
       setSocket(s);
       return () => {
@@ -96,11 +103,34 @@ export default function AppElement() {
       }
     }, []);
   
+    if (tableId == undefined) {
+      return (
+
+        <div className='container-fluid'>
+        
+        <MyModal show={true} createTable={createTable} tableCode={tableCode} joinTable={joinTable} setTableCode={setTableCode}/>
+          <Navbar bg="none" expand={false}>
+            
+            <Container fluid>
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet" />
+
+              {/* <img src={messydesk} className='.img-thumbnail'/> */}
+              <h1 className='messydesk'><span className='reddd'>Messy</span> <br></br>Desk</h1>
+              {/* <h1 className='code'><span className='reddd'>Table code</span> <br></br>{tableId.substring(0, 3) + "-" + tableId.substring(3)}</h1> */}
+            </Container>
+          </Navbar>
+        <NotesList saveToApp={saveToApp} notes={notes} socket={socket} quill0={quill0} quill1={quill1} quill2={quill2} quill3={quill3} quill4={quill4} quill5={quill5} setQuill0={setQuill0} setQuill1={setQuill1} setQuill2={setQuill2} setQuill3={setQuill3} setQuill4={setQuill4} setQuill5={setQuill5}/>
+        
+      </div>
+    )
+    }
     return (
 
         <div className='container-fluid'>
-    
-        <MyModal show={modalShow && !(showFromParam === 'false')} createTable={createTable} joinTable={joinTable} setTableCode={setTableCode}/>
+        
+        <MyModal show={false} createTable={createTable} tableCode={tableCode} joinTable={joinTable} setTableCode={setTableCode}/>
           <Navbar bg="none" expand={false}>
             
             <Container fluid>

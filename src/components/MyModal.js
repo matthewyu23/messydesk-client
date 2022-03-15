@@ -25,7 +25,7 @@ const MyModal = (props) => {
             <Form className='d-flex'>
             <Button onClick={props.createTable}>Create a Table</Button>
             <Form.Control type="number" placeholder="Table Code" onChange={e => {props.setTableCode(e.target.value)}}/>
-            <Button onClick={props.joinTable}>Join table</Button>
+            <Button disabled={!props.tableCode} onClick={props.joinTable}>Join table</Button>
             </Form>
 
 
