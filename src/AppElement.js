@@ -127,7 +127,9 @@ export default function AppElement() {
             <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet" />
 
               {/* <img src={messydesk} className='.img-thumbnail'/> */}
-              <h1 className='messydesk'><span className='reddd'>Messy</span> <br></br>Desk</h1>
+              <a  href="/" className="text-decoration-none"> 
+              <h1 className='messydesk'><span className='reddd'>Messy</span> <br></br><span className='blackkk'>Desk</span></h1>
+              </a>
               {/* <h1 className='code'><span className='reddd'>Table code</span> <br></br>{tableId.substring(0, 3) + "-" + tableId.substring(3)}</h1> */}
             </Container>
           </Navbar>
@@ -149,7 +151,9 @@ export default function AppElement() {
             <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet" />
 
               {/* <img src={messydesk} className='.img-thumbnail'/> */}
-              <h1 className='messydesk'><span className='reddd'>Messy</span> <br></br>Desk</h1>
+              <a  href="/" className="text-decoration-none">
+                <h1 className='messydesk'><span className='reddd'>Messy</span> <br></br><span className='blackkk'>Desk</span></h1>
+              </a>
               <h1 className='code'><span className='reddd'>Table code</span> <br></br>{tableId.substring(0, 3) + " " + tableId.substring(3)}</h1>
 
             </Container>

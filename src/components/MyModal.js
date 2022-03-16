@@ -30,10 +30,10 @@ const MyModal = (props) => {
 
             
             
-            <Form className='d-flex'>
+            <Form className='d-flex' onSubmit={props.joinTable}>
             <Button onClick={props.createTable}>Create a Table</Button>
             <Form.Control type="number" placeholder="Table Code" onChange={e => {props.setTableCode(e.target.value)}}/>
-            <Button disabled={parseInt(props.tableCode) <= 0 || parseInt(props.tableCode) > 999999 || props.tableCode.length != 6} onClick={props.joinTable}>Join table</Button>
+            <Button type="submit" disabled={parseInt(props.tableCode) <= 0 || parseInt(props.tableCode) > 999999 || props.tableCode.length != 6} >Join table</Button>
             </Form>
 
 
